@@ -1,4 +1,6 @@
 from django.db import models
+# from . views import get_activation_code
+from .utils import get_activation_code
 
 # Create your models here.
 
@@ -6,6 +8,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):
-    gender = models.CharField(max_length=10, choices=[('M', 'Male'), ('F', 'Female')])
+    gender = models.CharField(max_length=10)
     phonenumber = models.CharField(max_length=15)
-    location = models.CharField(max_length=100)
+    activation_code = models.PositiveIntegerField(default=get_activation_code())
+    account_active = models.BooleanField(default=False)
